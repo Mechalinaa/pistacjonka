@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/* ——— Paleta Pistacjonki ———
+   pistacja = kolor marki, krem = tło, beż = powierzchnie,
+   karmel/cynamon = akcenty, pastele = oznaczenia pomocnicze. */
+@theme {
+  --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', Georgia, serif;
+
+  --color-cream: #fbf8f1;
+  --color-cream-2: #f6f0e4;
+  --color-beige: #efe5d3;
+  --color-beige-2: #e6d8c0;
+  --color-card: #fffdf9;
+
+  --color-ink: #3b2f26;
+  --color-ink-2: #6e5f51;
+  --color-ink-3: #a19282;
+
+  --color-pista-50: #f3f7ea;
+  --color-pista-100: #e5eed2;
+  --color-pista-200: #cfe0ad;
+  --color-pista-300: #b3cd82;
+  --color-pista-400: #97b75d;
+  --color-pista-500: #7b9d42;
+  --color-pista-600: #627f33;
+  --color-pista-700: #4c6329;
+  --color-pista-800: #3d4f24;
+
+  --color-caramel-100: #f7e7d1;
+  --color-caramel-200: #efcfa6;
+  --color-caramel-300: #e3b27a;
+  --color-caramel-400: #d39555;
+  --color-caramel-500: #b8773a;
+  --color-caramel-600: #94602f;
+  --color-cinnamon: #8a4f2a;
+
+  --color-rose: #f1d6cf;
+  --color-butter: #f5e8bd;
+  --color-lavender: #e4def0;
+  --color-mint: #d6e9df;
+
+  --color-prio-high: #c4683f;
+  --color-prio-mid: #d8a443;
+  --color-prio-low: #93ae74;
+
+  --shadow-soft: 0 1px 2px rgb(92 64 38 / 0.05), 0 4px 14px -4px rgb(92 64 38 / 0.1);
+  --shadow-lift: 0 2px 4px rgb(92 64 38 / 0.06), 0 14px 32px -10px rgb(92 64 38 / 0.22);
+
+  --animate-rise: rise 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade: fade 0.25s ease-out both;
+  --animate-pop: pop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  --animate-bake: bake 2.4s ease-in-out infinite;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes pop {
+    0% { opacity: 0; transform: scale(0.6); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes bake {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(211 149 85 / 0.0), inset 0 0 0 0 rgb(211 149 85 / 0); }
+    50% { box-shadow: 0 0 40px 6px rgb(211 149 85 / 0.35), inset 0 0 24px 0 rgb(211 149 85 / 0.18); }
+  }
+}
+
+html { background: var(--color-cream); }
+body {
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--color-pista-200); }
+
+.font-display { font-variation-settings: 'SOFT' 80, 'WONK' 0; }
+
+/* Delikatny pasek przewijania w kolorach marki */
+* { scrollbar-width: thin; scrollbar-color: var(--color-beige-2) transparent; }
+
+:focus-visible { outline: 2px solid var(--color-pista-500); outline-offset: 2px; border-radius: 10px; }
+
+input[type='date']::-webkit-calendar-picker-indicator { opacity: 0.55; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Abstrakcyjny placeholder pistacjonki: krem + pistacjowa spirala z gradientów.
+   Zostanie zastąpiony własną grafiką (patrz src/config/images.ts). */
+.pista-token {
+  background:
+    radial-gradient(circle at 50% 50%, var(--color-pista-300) 0 14%, transparent 15%),
+    repeating-radial-gradient(circle at 50% 50%, var(--color-caramel-200) 0 9%, var(--color-caramel-300) 9% 13%, var(--color-pista-200) 13% 17%),
+    var(--color-caramel-200);
+  box-shadow: inset 0 -3px 6px rgb(148 96 47 / 0.25), 0 2px 6px rgb(92 64 38 / 0.15);
+}
+
+/* Elementy siatki nie rozpychają layoutu na wąskich ekranach */
+.grid > * { min-width: 0; }
+select { max-width: 100%; }
